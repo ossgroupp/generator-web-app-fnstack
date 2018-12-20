@@ -1,0 +1,41 @@
+{
+  "name": "generator-web-app-fnstack",
+  "version": "0.1.0",
+  "description": "Yeoman generator for web front-end projects (React, react-apollo, Typescript, Webpack).",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fnstack/generator-web-app-fnstack.git"
+  },
+  "files": [
+    "app"
+  ],
+  "keywords": [
+    "yeoman-generator",
+    "typescript",
+    "react",
+    "react-apollo",
+    "graphQL",
+    "ant design",
+    "ant",
+    "antd",
+    "webpack"
+  ],
+  "author": "Fn Stacks Dev team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fnstack/generator-web-app-fnstackissues"
+  },
+  "homepage": "https://github.com/fnstack/generator-web-app-fnstack#readme",
+  "scripts": {
+    "reset-template": "rimraf ./app/templates && node app/reset-template.js"
+  },
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "ncp": "^2.0.0",
+    "rimraf": "^2.6.2",
+    "underscore.string": "^3.3.5",
+    "webapp-starter-kit": "git+https://git@github.com/fnstack/WebApp-starter-kit.git#0.5",
+    "yeoman-generator": "^3.1.1",
+    "yeoman-welcome": "^1.0.1"
+  }
+}

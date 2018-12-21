@@ -3,64 +3,51 @@
 const Generator = require("yeoman-generator");
 const utils = require("./utils");
 
-
 // const baseRootPath = path.resolve(__dirname, 'app/templates');
 
 module.exports = class extends Generator {
-  // constructor(args, opts) {
-  //   super(args, opts);
-  //   // Make options available
-  //   this.option("skip-welcome-message", {
-  //     desc: "Skip the welcome message",
-  //     type: Boolean,
-  //     defaults: false
-  //   });
+  // async prompting2() {
+  //   const answers = await this.prompt([{
+  //     type    : 'input',
+  //     name    : 'name',
+  //     message : 'Your project name',
+  //     default : this.appname // Default to current folder name
+  //   }, {
+  //     type    : 'confirm',
+  //     name    : 'cool',
+  //     message : 'Would you like to enable the Cool feature?'
+  //   }]);
 
-  //   this.config.save();
+  //   this.log('app name', answers.name);
+  //   this.log('cool feature', answers.cool);
   // }
 
-  // initializing() {
-  //   if (!this.options["skip-welcome-message"]) {
-  //     this.log(require("yeoman-welcome"));
-  //     this.log(
-  //       "The template is about to initialize web application using react, react-apollo, antd and webpack.\n"
-  //     );
-  //   }
-  // }
+  async prompting() {
+    const answers = await this.prompt([
+      {
+        type: "input",
+        name: "name",
+        message: "Please enter your project name",
+        default: this.appname
+      }
+    ]);
 
-  // async prompting() {
-  //   const answers = await this.prompt([
-  //     {
-  //       type: "input",
-  //       appName: "name",
-  //       message: "Please enter your project name",
-  //       default: utils.getAppName()
-  //     }
-  //   ]);
-
-  //   if (answers.appName !== utils.getAppName()) {
-  //     answers.appName = utils.getAppName(answers.appName);
-  //   }
-
-  //   this.log("project name", answers.name);
-
-  //   // Set needed global vars for yo
-  //   this.appName = answers.appName;
-
-  //   // Set needed keys into config
-  //   this.config.set("appName", this.appName);
-  //   this.config.set("appPath", this.appPath);
-  //   this.config.set("generatedWithVersion", this.generatedWithVersion);
-  // }
-
-  writing() {
-    this.fs.copy(
-      this.templatePath('**'),
-      this.destinationPath()
-    );
+    // Make sure to get the correct app name if it is not the default
+    if (answers.name !== utils.getAppName()) {
+      answers.name = utils.getAppName(answers.appName);
+    }
+    this.log("project name", answers.name);
+    // // Set needed global vars for yo
+    this.appname = answers.appName;
+    // // Set needed keys into config
+    // this.config.set("appName", this.appName);
+    // this.config.set("appPath", this.appPath);
+    // this.config.set("generatedWithVersion", this.generatedWithVersion);
   }
 
-
+  writing() {
+    this.fs.copyTpl(this.templatePath("**"), this.destinationPath(), {
+      title: "Templating with Yeoman"
+    });
+  }
 };
-
-

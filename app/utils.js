@@ -1,6 +1,19 @@
 "use strict";
 
+const path = require('path');
 const _ = require("underscore.string");
+
+// Needed directory paths
+const baseName = path.basename(process.cwd());
+
+/**
+ * Get the base directory
+ * @return {String}
+ */
+let getBaseDir = () => {
+  return baseName;
+};
+
 
 /**
  * Get a js friendly application name

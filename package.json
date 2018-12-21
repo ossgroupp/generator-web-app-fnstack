@@ -27,15 +27,35 @@
   },
   "homepage": "https://github.com/fnstack/generator-web-app-fnstack#readme",
   "scripts": {
-    "reset-template": "rimraf ./app/templates && node app/reset-template.js"
+    "reset-template": "rimraf ./app/templates && node app/reset-template.js",
+    "lint": "esw --color"
   },
   "dependencies": {
     "chalk": "^2.4.1",
+    "eslint": "^5.10.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "eslint-watch": "^4.0.2",
+    "husky": "^1.2.1",
+    "lint-staged": "^8.1.0",
     "ncp": "^2.0.0",
+    "prettier": "^1.15.3",
     "replace-in-files": "^1.1.3",
     "rimraf": "^2.6.2",
     "underscore.string": "^3.3.5",
     "webapp-starter-kit": "git+https://git@github.com/fnstack/WebApp-starter-kit.git#0.5",
     "yeoman-generator": "^3.1.1"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write",
+      "esw --ext ",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }

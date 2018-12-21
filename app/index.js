@@ -6,22 +6,6 @@ const utils = require("./utils");
 // const baseRootPath = path.resolve(__dirname, 'app/templates');
 
 module.exports = class extends Generator {
-  // async prompting2() {
-  //   const answers = await this.prompt([{
-  //     type    : 'input',
-  //     name    : 'name',
-  //     message : 'Your project name',
-  //     default : this.appname // Default to current folder name
-  //   }, {
-  //     type    : 'confirm',
-  //     name    : 'cool',
-  //     message : 'Would you like to enable the Cool feature?'
-  //   }]);
-
-  //   this.log('app name', answers.name);
-  //   this.log('cool feature', answers.cool);
-  // }
-
   async prompting() {
     const answers = await this.prompt([
       {
@@ -29,25 +13,49 @@ module.exports = class extends Generator {
         name: "name",
         message: "Please enter your project name",
         default: this.appname
+      },
+      {
+        type: "input",
+        name: "version",
+        message: "Please enter the version of your project",
+        default: "0.1.0"
+      },
+      {
+        type: "input",
+        name: "author",
+        message: "Please enter the author of your project"
+      },
+      {
+        type: "input",
+        name: "licence",
+        message: "Please enter the licence of your project",
+        default: "MIT"
       }
     ]);
 
-    // Make sure to get the correct app name if it is not the default
-    if (answers.name !== utils.getAppName()) {
-      answers.name = utils.getAppName(answers.appName);
-    }
     this.log("project name", answers.name);
     // // Set needed global vars for yo
-    this.appname = answers.appName;
-    // // Set needed keys into config
-    // this.config.set("appName", this.appName);
-    // this.config.set("appPath", this.appPath);
-    // this.config.set("generatedWithVersion", this.generatedWithVersion);
+    this.name = answers.name;
+    this.version = answers.version;
+    this.author = answers.author;
   }
 
   writing() {
+    const packageSettings = {
+      ...this.fs.readJSON(this.templatePath("package.json")),
+      name: this.name,
+      version: this.version,
+      author: this.author,
+      licence: this.licence
+    };
     this.fs.copyTpl(this.templatePath("**"), this.destinationPath(), {
-      title: "Templating with Yeoman"
+      title: this.name
     });
+
+    this.fs.writeJSON(this.destinationPath("package.json"), packageSettings);
+  }
+
+  install() {
+    this.yarnInstall();
   }
 };

@@ -37,7 +37,7 @@ class App extends React.PureComponent<{}, AppState> {
             </Link>
             {!collapsed && (
               <Link to="/">
-                <span>Web Starter kit</span>
+                <span><%= title %></span>
               </Link>
             )}
           </div>

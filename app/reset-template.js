@@ -5,7 +5,7 @@ const chalk = require('chalk');
 ncp.limit = 100;
 
 const options = {
-  files: 'app/templates/src/layout/app.tsx',
+  files: 'app/templates/src/modules/app/app.tsx',
 
   // See more: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace
   // Replacement
@@ -23,7 +23,7 @@ ncp('./node_modules/webapp-starter-kit', './app/templates', function(err) {
   if (err) {
     return console.error(chalk.red(err));
   }
-  console.error(chalk.green('Reinitialisation of template succeeded 👌'));
+  console.error(chalk.green('Réinitialisation of template succeeded 👌'));
 
   addTemplateSyntax();
 });

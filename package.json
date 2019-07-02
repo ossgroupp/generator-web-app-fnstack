@@ -1,6 +1,6 @@
 {
   "name": "generator-web-app-fnstack",
-  "version": "0.1.1-beta.1",
+  "version": "0.1.0",
   "description": "Yeoman generator for web front-end projects (React, react-apollo, Typescript, Webpack).",
   "repository": {
     "type": "git",
@@ -38,6 +38,7 @@
     "husky": "^2.1.0",
     "lint-staged": "^8.1.5",
     "ncp": "^2.0.0",
+    "npm-version": "^1.1.0",
     "prettier": "^1.17.0",
     "replace-in-files": "^1.1.4",
     "rimraf": "^2.6.3",
